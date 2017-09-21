@@ -41,17 +41,34 @@ public class GraphRenderer {
             float y1 = graph[i + 1];
             float x2 = graph[i + 2];
             float y2 = graph[i + 3];
-            float x3;
-            float y3;
-            if (Math.abs(y1) > Math.abs(y2)) {
-                x3 = x1;
-                y3 = y2;
+            Vector2 intersection = new Vector2();
+            if (Intersector.intersectSegments(
+                    x1, y1, x2, y2,
+                    x1, 0, x2, 0,
+                    intersection
+            )) {
+                renderer.triangle(
+                        x1, y1,
+                        x1, 0,
+                        intersection.x, 0
+                );
+                renderer.triangle(
+                        intersection.x, 0,
+                        x2, 0,
+                        x2, y2
+                );
             } else {
-                x3 = x2;
-                y3 = y1;
+                renderer.triangle(
+                        x1, y1,
+                        x2, y2,
+                        x1, 0
+                );
+                renderer.triangle(
+                        x2, y2,
+                        x1, 0,
+                        x2, 0
+                );
             }
-            renderer.triangle(x1, y1, x2, y2, x3, y3);
-            renderer.rect(x1, 0, x2 - x1, y3);
         }
         renderer.end();
     }
