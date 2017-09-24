@@ -1,4 +1,4 @@
-package com.louiswebbgmes.interpolate;
+package com.louiswebbgmes.interpolate.interpolation;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -16,14 +16,14 @@ public class GraphRenderer {
         }
     }
 
-    public static void render(float[] graph1, float[] graph2, ShapeRenderer renderer, Color color, boolean fill) {
+    public static void render(float[] graph1, float[] graph2, ShapeRenderer renderer, Color color) {
         renderer.setColor(color);
-        if (fill) {
-            renderBetweenGraphs(graph1, graph2, renderer);
-        } else {
-            renderLines(graph1, renderer);
-            renderLines(graph2, renderer);
-        }
+        renderBetweenGraphs(graph1, graph2, renderer);
+    }
+
+    public static void render(float[] graph1, float[] graph2, ShapeRenderer renderer, Color color1, Color color2) {
+        render(graph1, renderer, color1, false);
+        render(graph2, renderer, color2, false);
     }
 
     protected static void renderLines(float[] graph, ShapeRenderer renderer) {

@@ -1,4 +1,4 @@
-package com.louiswebbgmes.interpolate;
+package com.louiswebbgmes.interpolate.interpolation;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -11,8 +11,8 @@ public class EvolvingInterpolation extends Interpolation {
     float timer;
     boolean evolving;
 
-    public EvolvingInterpolation(float duration) {
-        super();
+    public EvolvingInterpolation(int points, float duration) {
+        super(points);
         this.duration = duration;
         evolving = false;
         timer = 0;

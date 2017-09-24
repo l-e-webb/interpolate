@@ -1,16 +1,16 @@
-package com.louiswebbgmes.interpolate;
+package com.louiswebbgmes.interpolate.interpolation;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
-public class FreeInterpolator extends EvolvingInterpolation {
+public class FreeInterpolation extends EvolvingInterpolation {
 
     float maxYAmp;
     GenerationType genType;
     int numPoints;
 
-    public FreeInterpolator(int points, float duration, float maxYAmp, GenerationType genType) {
-        super(duration);
+    public FreeInterpolation(int points, float duration, float maxYAmp, GenerationType genType) {
+        super(points, duration);
         this.maxYAmp = maxYAmp;
         this.genType = genType;
         this.numPoints = points;
@@ -25,7 +25,7 @@ public class FreeInterpolator extends EvolvingInterpolation {
     }
 
     protected Vector2[] getRandomPointSet() {
-        return FreeInterpolator.getRandomPointSet(numPoints, maxYAmp, genType);
+        return FreeInterpolation.getRandomPointSet(numPoints, maxYAmp, genType);
     }
 
     protected static Vector2[] getRandomPointSet(int numPoints, float maxYAmp, GenerationType genType) {

@@ -3,33 +3,40 @@ package com.louiswebbgmes.interpolate;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.louiswebbgmes.interpolate.interpolation.Interpolation;
+import com.louiswebbgmes.interpolate.interpolation.InterpolationController;
+import com.louiswebbgmes.interpolate.interpolation.InterpolationSettings;
+import com.louiswebbgmes.interpolate.ui.OpeningMenu;
+import com.louiswebbgmes.interpolate.ui.UiConstants;
 
 public class InterpolateGame extends ApplicationAdapter {
 
-    boolean showAxes = false;
+    boolean interpolationMode;
 
-    Viewport viewport;
+    Viewport interpolationViewport;
+    Viewport uiViewport;
     ShapeRenderer renderer;
-    Stage stage;
-    EvolvingInterpolation interpolation;
-    EvolvingInterpolation interpolation2;
+    InterpolationController controller;
+    OpeningMenu openingMenu;
+    InputMultiplexer input;
 
 	@Override
 	public void create () {
+        UiConstants.initUi();
         Interpolation.setSegments(500);
-        viewport = new ExtendViewport(1, 0.5f, 1, 0);
-        updateCamera();
-        renderer = new ShapeRenderer();
-        interpolation = new FreeInterpolator(4, 15, 0.1f, FreeInterpolator.GenerationType.RANDOM);
-        interpolation2 = new FreeInterpolator(7, 6, 0.25f, FreeInterpolator.GenerationType.STRIPES);
+
+        uiViewport = new ScreenViewport();
+        openingMenu = new OpeningMenu(this, uiViewport);
+
+        input = new InputMultiplexer();
+        input.addProcessor(openingMenu);
+        Gdx.input.setInputProcessor(input);
 	}
 
 	@Override
@@ -46,21 +53,17 @@ public class InterpolateGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        float delta = Gdx.graphics.getDeltaTime();
-        interpolation.update(delta);
-        interpolation2.update(delta);
+        if (interpolationMode) {
+            float delta = Gdx.graphics.getDeltaTime();
+            controller.update(delta);
 
-        renderer.setProjectionMatrix(viewport.getCamera().combined);
-
-        if (showAxes) {
-            renderer.begin(ShapeRenderer.ShapeType.Line);
-            renderer.setColor(Color.RED);
-            renderer.line(0, 0, 1, 0);
-            renderer.line(0.005f, -0.5f, 0.005f, 0.5f);
-            renderer.end();
+            updateCamera();
+            renderer.setProjectionMatrix(interpolationViewport.getCamera().combined);
+            controller.render(renderer);
         }
 
-        GraphRenderer.render(interpolation.getGraph(), interpolation2.getGraph(), renderer, Color.WHITE, true);
+        openingMenu.act();
+        openingMenu.draw();
 	}
 	
 	@Override
@@ -70,12 +73,37 @@ public class InterpolateGame extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
-        updateCamera();
+        if (interpolationViewport != null) {
+            interpolationViewport.update(width, height);
+            updateCamera();
+        }
+        uiViewport.update(width, height, true);
+        openingMenu.resize();
     }
 
-    public void updateCamera() {
-        viewport.getCamera().position.x = 0.5f;
-        viewport.getCamera().position.y = 0;
+    void updateCamera() {
+        interpolationViewport.getCamera().position.x = 0.5f;
+        interpolationViewport.getCamera().position.y = 0;
+    }
+
+    public void initInterpolation(InterpolationSettings settings) {
+        interpolationViewport = new ExtendViewport(1, 0.5f, 1, 0);
+        renderer = new ShapeRenderer();
+        controller = new InterpolationController(interpolationViewport, input, settings);
+        //Voodoo:
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        interpolationMode = true;
+        openingMenu.hideMenu();
+        openingMenu.showBackButton();
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    public void returnToMenu() {
+        interpolationMode = false;
+        openingMenu.hideBackButton();
+        openingMenu.showMenu();
+        input.clear();
+        input.addProcessor(openingMenu);
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 }

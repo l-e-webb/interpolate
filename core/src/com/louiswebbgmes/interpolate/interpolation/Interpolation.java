@@ -1,4 +1,4 @@
-package com.louiswebbgmes.interpolate;
+package com.louiswebbgmes.interpolate.interpolation;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -11,7 +11,9 @@ public class Interpolation {
     Vector2[] interpolationPoints;
     float[] graph;
 
-    public Interpolation() {}
+    public Interpolation(int numPoints) {
+        this(basePointSet(numPoints));
+    }
 
     public Interpolation(Vector2[] points) {
         setInterpolationPoints(points);
@@ -32,7 +34,13 @@ public class Interpolation {
     }
 
     public void setInterpolationPoints(Vector2... points) {
-        this.interpolationPoints = points;
+        if (interpolationPoints == null || points.length != interpolationPoints.length) {
+            interpolationPoints = points;
+        } else {
+            for (int i = 0; i < points.length; i++) {
+                interpolationPoints[i].set(points[i]);
+            }
+        }
         graph();
     }
 
@@ -57,6 +65,14 @@ public class Interpolation {
 
     public static void setSegments(int segments) {
         Interpolation.segments = segments;
+    }
+
+    public static Vector2[] basePointSet(int numPoints) {
+        Vector2[] pointSet = new Vector2[numPoints];
+        for (int i = 0; i < numPoints; i++) {
+            pointSet[i] = new Vector2(1f * (i+1) / (numPoints + 1), 0);
+        }
+        return pointSet;
     }
 
 }
