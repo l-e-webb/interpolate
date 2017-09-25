@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+       <head>
+              <title>.interpolate()</title>
+              <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+              <link href="styles.css" rel="stylesheet" type="text/css">
+              <link rel="icon" href="polynomial_icon.png">
+              <meta property="og:image" content="share_icon.png">
+              <meta property="og:image:type" content="image/png">
+              <meta property="og:image:width" content="599">
+              <meta property="og:image:height" content="536">
+              <script src="soundmanager2-setup.js"></script>
+  			  <script src="soundmanager2-jsmin.js"></script>
+       </head>
+
+       <body>
+              <!--Superdev button
+              <a class="superdev" href="javascript:%7B%20window.__gwt_bookmarklet_params%20%3D%20%7B'server_url'%3A'http%3A%2F%2Flocalhost%3A9876%2F'%7D%3B%20var%20s%20%3D%20document.createElement('script')%3B%20s.src%20%3D%20'http%3A%2F%2Flocalhost%3A9876%2Fdev_mode_on.js'%3B%20void(document.getElementsByTagName('head')%5B0%5D.appendChild(s))%3B%7D">&#8635;</a>
+              -->
+              <div align="center" id="embed-html"></div>
+              <div align="center" id="info-block">
+                     <h2 id="title">.interpolate()</h2>
+                     <h3 id="subtitle">Lagrange Interpolation Visualizer</h3>
+                     <p>
+                            <a href="https://en.wikipedia.org/wiki/Lagrange_polynomial" target="_blank">Lagrange interpolation</a> is a mathematical method for creating a polynomial function whose graphs passes through a fixed collection of points.  The result is the polynomial function of least degree that passes through the given points, known as a Lagrange polynomial.  This visualizer allows you to manipulate the point set of a Lagrange polynomial in real-time, and observe how the polynomial changes.  It also has a "free" mode where the points will move on their own.
+                     <p>
+                     <p>
+                            Please note that this project is still under development.  More features and a nicer UI to come!
+                     </p>
+              </p>
+                     <h3>Options</h3>
+                     <ul>
+                            <li><strong># of polynomials</strong>: how many Lagrange polynomials to graph, 1 or 2.</li>
+                            <li><strong>Interpolation points</strong>: how many points should be used to form each polynomial, from 2 to 9.  Note that Lagrange polynomials have degree one less than the number of points used.</li>
+                            <li><strong>Graphing style</strong>: Line or filled.  Line graphs the polynomial(s) normally, filled shows either the area beneath the graph (if graphing one polynomial), or the area between the graphs (if graphing two polynomials).</li>
+                            <li><strong>Interpolation mode</strong>: static or free.  Static allows you to drag the points around and watch the graph change.  Free will randomly shift the points within certain parameters, often producing interesting visuals.
+                            <li><strong>Show axes</strong>: whether to hide or show the <em>x</em>- and <em>y</em>-axes.  The <em>x</em>-axis crosses the center of the viewing area, while the <em>y</em>-axis is the left edge.  Note that translating a set of points together simply translates the Lagrange polynomial by the same amount, so the position of the origin is essentially irrelevant.</li>
+                            <li><strong>Show points</strong>: whether to show the point set being used to create the Lagrange polynomial.  When in "static" mode, this box is automatically checked.</li>
+                     </ul>
+
+                     <h3>Credits</h3>
+                     <p>
+                            Created by <a href="https://tangledwebgames.com" target="_blank">Louis Webb</a> with libGDX, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.  Feel free to <a href="https://github.com/l-e-webb/interpolate" target="_blank">view source</a>!
+                     </p>
+                     <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+              </div>
+              <script type="text/javascript" src="html/html.nocache.js"></script>
+       </body>
+
+       <script>
+              function handleMouseDown(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+                evt.target.style.cursor = 'default';
+              }
+
+              function handleMouseUp(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+                evt.target.style.cursor = '';
+              }
+              document.getElementById('embed-html').addEventListener('mousedown', handleMouseDown, false);
+              document.getElementById('embed-html').addEventListener('mouseup', handleMouseUp, false);
+       </script>
+</html>
