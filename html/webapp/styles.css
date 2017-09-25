@@ -4,7 +4,39 @@ canvas {
 }
 
 body {
-    background-color: #222222;
+    background-color: #000;
+    font-family: sans-serif;
+    font-size: 12pt;
+}
+
+#embed-html {
+    width: 800px;
+    height: 800px;
+    background: #222;
+    margin: auto;
+    border: 1px solid white;
+}
+
+#info-block {
+    background-color: #eee;
+    width: 740px;
+    border-radius: 20px;
+    padding: 30px;
+    color: #111;
+    margin: auto;
+    text-align: left;
+    margin-top: 0.5em;
+}
+
+#title {
+    text-align:center;
+    margin-top:0em;
+    margin-bottom:0.5em;
+}
+
+#subtitle {
+    margin-top:0px;
+    text-align:center;
 }
 
 .superdev {

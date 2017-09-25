@@ -37,7 +37,7 @@ public class OpeningMenu extends Stage {
 
     void init() {
         initMenu();
-        backButton = new Image(UiConstants.leftArrow);
+        backButton = new Image(UiConstants.backButton);
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

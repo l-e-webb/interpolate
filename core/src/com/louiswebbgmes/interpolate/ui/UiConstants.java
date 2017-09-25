@@ -29,6 +29,7 @@ public class UiConstants {
     static Drawable checkboxFilled;
     static Drawable leftArrow;
     static Drawable rightArrow;
+    static Drawable backButton;
     static Drawable empty;
 
     static NumberSelector.NumberSelectorStyle numSelectorStyle;
@@ -72,6 +73,9 @@ public class UiConstants {
         );
         empty = new TextureRegionDrawable(
                 new TextureRegion(new Texture("empty.png"))
+        );
+        backButton = new TextureRegionDrawable(
+                new TextureRegion(new Texture("back_button.png"))
         );
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
