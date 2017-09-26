@@ -23,19 +23,23 @@
                      <h3 id="subtitle">Lagrange Interpolation Visualizer</h3>
                      <p>
                             <a href="https://en.wikipedia.org/wiki/Lagrange_polynomial" target="_blank">Lagrange interpolation</a> is a mathematical method for creating a polynomial function whose graphs passes through a fixed collection of points.  The result is the polynomial function of least degree that passes through the given points, known as a Lagrange polynomial.  This visualizer allows you to manipulate the point set of a Lagrange polynomial in real-time, and observe how the polynomial changes.  It also has a "free" mode where the points will move on their own.
-                     <p>
-                     <p>
-                            Please note that this project is still under development.  More features and a nicer UI to come!
                      </p>
-              </p>
-                     <h3>Options</h3>
+                     <h3>Main Options</h3>
                      <ul>
                             <li><strong># of polynomials</strong>: how many Lagrange polynomials to graph, 1 or 2.</li>
-                            <li><strong>Interpolation points</strong>: how many points should be used to form each polynomial, from 2 to 9.  Note that Lagrange polynomials have degree one less than the number of points used.</li>
-                            <li><strong>Graphing style</strong>: Line or filled.  Line graphs the polynomial(s) normally, filled shows either the area beneath the graph (if graphing one polynomial), or the area between the graphs (if graphing two polynomials).</li>
                             <li><strong>Interpolation mode</strong>: static or free.  Static allows you to drag the points around and watch the graph change.  Free will randomly shift the points within certain parameters, often producing interesting visuals.
                             <li><strong>Show axes</strong>: whether to hide or show the <em>x</em>- and <em>y</em>-axes.  The <em>x</em>-axis crosses the center of the viewing area, while the <em>y</em>-axis is the left edge.  Note that translating a set of points together simply translates the Lagrange polynomial by the same amount, so the position of the origin is essentially irrelevant.</li>
                             <li><strong>Show points</strong>: whether to show the point set being used to create the Lagrange polynomial.  When in "static" mode, this box is automatically checked.</li>
+                            <li><strong>Graphing style</strong>: Line or filled.  Line graphs the polynomial(s) normally, filled shows either the area beneath the graph (if graphing one polynomial), or the area between the graphs (if graphing two polynomials).</li>
+                     </ul>
+                     <h3>Polynomial Options</h3>
+                     <p>
+                            Each polynomial has its options set separately, with additional options for free mode.
+                     </p>
+                     <ul>
+                            <li><strong>Interpolation points</strong>: how many points should be used to form each polynomial, from 2 to 9.  Note that Lagrange polynomials have degree one less than the number of points used.</li>
+                            <li><strong>Speed (free mode only)</strong>: how quickly the polynomial will change.
+                            <li><strong>Motion (free mode only)</strong>: algorithm for determining how the polynomial changes over time. The "bands" option moves each point in the generating set for the polynomial within a vertical band, while "random" will move each point to an arbitrary new point. Lagrange polynomial behavior is most erratic when two of the generating points have close <em>x</em> values, and the sign of the polynomial flips every time one point crosses another. Since in the "bands" option, the interpolation points never cross, it produces much more stable motion than the "random" option.</li>
                      </ul>
 
                      <h3>Credits</h3>
