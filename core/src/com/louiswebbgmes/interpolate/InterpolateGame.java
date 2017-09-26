@@ -33,6 +33,7 @@ public class InterpolateGame extends ApplicationAdapter {
 
         uiViewport = new ScreenViewport();
         openingMenu = new OpeningMenu(this, uiViewport);
+        renderer = new ShapeRenderer();
 
         input = new InputMultiplexer();
         input.addProcessor(openingMenu);
@@ -88,7 +89,6 @@ public class InterpolateGame extends ApplicationAdapter {
 
     public void initInterpolation(InterpolationSettings settings) {
         interpolationViewport = new ExtendViewport(1, 0.5f, 1, 0);
-        renderer = new ShapeRenderer();
         controller = new InterpolationController(interpolationViewport, input, settings);
         //Voodoo:
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

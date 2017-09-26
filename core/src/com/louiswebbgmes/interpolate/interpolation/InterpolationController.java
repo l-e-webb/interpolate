@@ -126,16 +126,16 @@ public class InterpolationController {
         if (settings.free) {
             setInterpolation1(new FreeInterpolation(
                     settings.numPoints1,
-                    3f,
-                    0.4f,
-                    FreeInterpolation.GenerationType.STRIPES
+                    Constants.SPEED_SETTINGS[settings.speedSetting1],
+                    Constants.INTERP_POINT_MAX_Y,
+                    Constants.GENERATION_TYPES[settings.motionSetting1]
             ));
             if (!settings.single) {
                 setInterpolation2(new FreeInterpolation(
                         settings.numPoints2,
-                        3f,
-                        0.4f,
-                        FreeInterpolation.GenerationType.STRIPES
+                        Constants.SPEED_SETTINGS[settings.speedSetting2],
+                        Constants.INTERP_POINT_MAX_Y,
+                        Constants.GENERATION_TYPES[settings.motionSetting2]
                 ));
             }
         } else {
